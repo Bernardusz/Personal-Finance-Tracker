@@ -1,0 +1,13 @@
+Welcome to Personal Finance Tracker!
+
+1. New User
+2. Log In
+3. Add Income
+4. Add Expense
+5. View All Transactions
+6. View Balance
+7. Filter by Category
+8. Save To Json
+9. Load From Json
+10. Change monthly income
+11. Exit
