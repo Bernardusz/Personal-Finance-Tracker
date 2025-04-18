@@ -12,6 +12,10 @@ class User:#As a flex, i add user~
         return self.__income
 
     @property
+    def return_username(self):
+        return self.username
+
+    @property
     def return_info_money(self):
         return self.__money
     
@@ -81,7 +85,7 @@ class FinanceTracker:
     
     def log_in(self, username):
         self.username = username
-        self.current_user = self.users[username]
+        self.current_user[username] = self.users[username]
         self.loggedin = True
     
     def change_income(self, amount):
@@ -93,8 +97,8 @@ class FinanceTracker:
         instance.edit_moneyflow(instance)
     
     def add_expenses(self, amount, category, date):
-        username = self.current_user[self.username].username
-        instance = Expense(amount, category, date, username)
+        user_obj = self.current_user[self.username]
+        instance = Expense(amount, category, date, user_obj)
         instance.edit_moneyflow(instance)
     
     def view_balance(self):
@@ -102,30 +106,43 @@ class FinanceTracker:
 
     def view_transaction(self):
         print("Here is the complete data : ")
-        print(self.current_user[self.username].return_transaction)
+
+        print("Expenses : ")
+        expenses = self.current_user[self.username].return_transaction_expense
+        for i in range(len(expenses)):
+            print(f"Date : {expenses[i].date} | Category : {expenses[i].category} | Amount : {expenses[i].moneyflow}")
+
+        print("Incomes : ")
+        income = self.current_user[self.username].return_transaction_income
+        for i in range(len(income)):
+            print(f"Date : {income[i].date} | Category : {income[i].category} | Amount : {income[i].moneyflow}")
 
     def view_expense(self):
         expenses = self.current_user[self.username].return_transaction_expense
         for i in range(len(expenses)):
-            print(f"Date : {expenses[i].date} \nCategory : {expenses[i].category} \nAmount : {expenses[i].moneyflow}")
+            print(f"Date : {expenses[i].date} | Category : {expenses[i].category} | Amount : {expenses[i].moneyflow}")
     
     def view_income(self):
         income = self.current_user[self.username].return_transaction_income
         for i in range(len(income)):
-            print(f"Date : {income[i].date} \nCategory : {income[i].category} \nAmount : {income[i].moneyflow}")
+            print(f"Date : {income[i].date} | Category : {income[i].category} | Amount : {income[i].moneyflow}")
 
     def viewby_category(self, category):
         expenses = self.current_user[self.username].return_transaction_expense
         income = self.current_user[self.username].return_transaction_income
         for i in range(len(expenses)):
             if category == expenses[i].category:
-                print(f"Date : {expenses[i].date} \nCategory : {expenses[i].category} \nAmount : {expenses[i].moneyflow}")
+                print(f"Date : {expenses[i].date} | Category : {expenses[i].category} | Amount : {expenses[i].moneyflow}")
+            else:
+                print("No match")
         for i in range(len(income)):
             if category == income[i].category:
-                print(f"Date : {income[i].date} \nCategory : {income[i].category} \nAmount : {income[i].moneyflow}")
+                print(f"Date : {income[i].date} | Category : {income[i].category} | Amount : {income[i].moneyflow}")
+            else:
+                print("No match")
 
     def save_json(self, file):
-        username =  self.current_user[self.username].username
+        username =  self.current_user[self.username].return_username
         incomes = self.current_user[self.username]. return_transaction_income
         expenses = self.current_user[self.username]. return_transaction_expense
         money = self.current_user[self.username].return_info_money

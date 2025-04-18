@@ -4,6 +4,7 @@ from allfunctions import read_welcone
 if __name__ == "__main__":
     FinanceTrackerApp = FinanceTracker()
     read_welcone()
+    print("Make sure when inputting data, NO SPACE !")
     while True:
         userinput = input("What do you want to do ? : ")
         
@@ -76,19 +77,19 @@ if __name__ == "__main__":
                 elif category.lower() == "income":
                     FinanceTrackerApp.view_income()
                 else:
+                    print("Heading to else")
                     FinanceTrackerApp.viewby_category(category)
-
             else:
                 print("You hasn't logged in yet !")
 
         elif userinput == "Save To Json":
             jsonfile = input("Enter file name [file.json] : ")
             if FinanceTrackerApp.loggedin == True:
-                try:
-                    FinanceTrackerApp.save_json(jsonfile)
-                    print("Added !")
-                except:
-                    print("Invalid input !")
+                # try:
+                FinanceTrackerApp.save_json(jsonfile)
+                print("Added !")
+                # except:
+                #     print("Invalid input !")
             else:
                 print("You hasn't logged in yet !")
         
