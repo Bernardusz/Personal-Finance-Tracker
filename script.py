@@ -85,11 +85,11 @@ if __name__ == "__main__":
         elif userinput == "Save To Json":
             jsonfile = input("Enter file name [file.json] : ")
             if FinanceTrackerApp.loggedin == True:
-                # try:
-                FinanceTrackerApp.save_json(jsonfile)
-                print("Added !")
-                # except:
-                #     print("Invalid input !")
+                try:
+                    FinanceTrackerApp.save_json(jsonfile)
+                    print("Added !")
+                except:
+                    print("Invalid input !")
             else:
                 print("You hasn't logged in yet !")
         
